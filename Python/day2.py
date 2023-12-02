@@ -22,9 +22,9 @@ def count(line):
         for j in t:
             temp = j.split()
             match temp[1]:
-                case "red": rgb[0]+=int(temp[0])
-                case "green": rgb[1]+=int(temp[0])
-                case "blue": rgb[2]+=int(temp[0])
+                case "red": rgb[0]=int(temp[0])
+                case "green": rgb[1]=int(temp[0])
+                case "blue": rgb[2]=int(temp[0])
         maxrgb = [max(rgb[0],maxrgb[0]), max(rgb[1],maxrgb[1]), max(rgb[2],maxrgb[2])]
     return maxrgb
 
