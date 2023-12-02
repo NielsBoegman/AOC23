@@ -48,12 +48,7 @@ def solve(f):
         p2+=np.prod(results[1])
     return [p1,p2]
 
-def part1(r):
-    print("Part1: ", r[0])
-
-def part2(r):
-    print("Part2: ", r[1])
-
+#Print the results
 result = solve(readInput())
-part1(result)
-part2(result)
+print("Part1: ", result[0])
+print("Part2: ", result[1])

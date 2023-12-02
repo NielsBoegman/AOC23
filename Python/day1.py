@@ -1,30 +1,33 @@
 import re
-inp = []
-replacement = {"one": "on1e", "two": "tw2o", "three":"th3ree", "four":"fo4ur","five":"fi5ve","six":"si6x","seven":"se7ven","eight":"eig8ht","nine":"ni9ne"}
+import sys
 
+#Dictionary for part 2 to replace instances of words that describe digits with digits, retaining the first letter for the infamous "oneight" type cases.
+replacement = {"one": "o1e", "two": "t2o", "three":"t3e", "four":"f4r","five":"f5e","six":"s6x","seven":"s7n","eight":"e8t","nine":"n9e"}
+
+#Open and return the file passed as parameter to program
 def readInput():
-    while True:
-        try:
-            inp.append(input())
-        except EOFError as e:
-            break;
+    f = open(sys.argv[1])
+    return f
 
-def calcSum(inp):
-    sum = 0
-    for line in inp:
-        li = re.sub("\D", '', line)
-        sum += int((li[0]) + li[-1])
-    return sum
+#Strip all non digit characters from the string
+def cleanup(line):
+    return re.sub("\D", '', line)
 
-def part1():
-    print("Part1: ", calcSum(inp))
-
-def part2():
-    for x in range(len(inp)):
+#Acutally solve both parts of the challenge
+def solve(lines):
+    results = [0,0]
+    for line in lines:
+        li1 = cleanup(line)
+        li2 = line
         for key in replacement.keys():
-           inp[x] = re.sub(key, replacement[key], inp[x]) 
-    print("Part2: ", calcSum(inp))
+            li2 = re.sub(key, replacement[key], li2)
+        li2 = cleanup(li2)
+        results[0]+=int(li1[0]+li1[-1])
+        results[1]+=int(li2[0]+li2[-1])
+    return results
 
-readInput()
-part1()
-part2()
+#Print results of part1
+lines_global = readInput().readlines()
+res = solve(lines_global)
+print("Part1: ", res[0])
+print("Part2: ", res[1])
