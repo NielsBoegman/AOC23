@@ -1,47 +1,46 @@
 import sys
 import re
+import numpy as np
 
 def readInput():
     f = open(sys.argv[1])
-    return f.readlines()
+    return f
 
 def valid(rgb):
     if rgb[0]>12 or rgb[1]>13 or rgb[2]>14:
         return False
     return True
     
-
 def count(line):
-    maxr = 0
-    maxb = 0
-    maxg = 0
+    maxrgb = [0,0,0]
     for i in range(len(line)):
         t = line[i].split(", ")
-        r=0
-        b=0
-        g=0
+        rgb=[0,0,0]
         for j in t:
-            temp = j.split(" ")
+            temp = j.split()
             match temp[1]:
-                case "red": r+=int(temp[0])
-                case "blue": b+=int(temp[0])
-                case "green": g+=int(temp[0])
-        maxr=max(r, maxr)
-        maxg=max(g,maxg)
-        maxb=max(b,maxb)
-    return [maxr,maxg,maxb]
+                case "red": rgb[0]+=int(temp[0])
+                case "green": rgb[1]+=int(temp[0])
+                case "blue": rgb[2]+=int(temp[0])
+        maxrgb = [max(rgb[0],maxrgb[0]), max(rgb[1],maxrgb[1]), max(rgb[2],maxrgb[2])]
+    return maxrgb
 
 def parse(l):
+    line = re.sub("Game \d*: ", "", l)
+    line = re.sub("\n","",line)
+    line = line.split("; ")
+    counts = count(line)
+    return [valid(counts), counts]
+
+def solve(f):
     p1 = 0
     p2 = 0
-    for x in range(len(l)):
-        line = re.sub("Game \d*: ", "", l[x])
-        line = re.sub("\n","",line)
-        line = line.split("; ")
-        counts = count(line)
-        if valid(counts):
-            p1+=x+1
-        p2+=counts[0]*counts[1]*counts[2]
+    counter=1
+    for line in f.readlines():
+        results = parse(line)
+        p1+=results[0]*counter
+        p2+=np.prod(results[1])
+        counter+=1
     return [p1,p2]
 
 def part1(r):
@@ -50,6 +49,6 @@ def part1(r):
 def part2(r):
     print("Part2: ", r[1])
 
-result = parse(readInput())
+result = solve(readInput())
 part1(result)
 part2(result)
