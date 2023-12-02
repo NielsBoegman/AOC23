@@ -14,9 +14,9 @@ def cleanup(line):
     return re.sub("\D", '', line)
 
 #Acutally solve both parts of the challenge
-def solve(lines):
+def solve(f):
     results = [0,0]
-    for line in lines:
+    for line in f.readlines():
         li1 = cleanup(line)
         li2 = line
         for key in replacement.keys():
@@ -27,7 +27,6 @@ def solve(lines):
     return results
 
 #Print results of part1
-lines_global = readInput().readlines()
-res = solve(lines_global)
+res = solve(readInput())
 print("Part1: ", res[0])
 print("Part2: ", res[1])
