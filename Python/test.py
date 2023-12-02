@@ -1,5 +1,4 @@
 import re
-test="one23one"
-test = re.sub('one', '1', test)
-# print(int(test[0]+test[-1]))
+test = "Game 1: bla, bla, bla"
+test = re.sub("Game \d: ", "", test) 
 print(test)
