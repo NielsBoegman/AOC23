@@ -2,15 +2,18 @@ import sys
 import re
 import numpy as np
 
+#Open file passed as parameter to the program
 def readInput():
     f = open(sys.argv[1])
     return f
 
+#Test if the amount of colored cubes matches the limits given in part 1
 def valid(rgb):
     if rgb[0]>12 or rgb[1]>13 or rgb[2]>14:
         return False
     return True
-    
+
+#Count maximum amount of cubes per color per game
 def count(line):
     maxrgb = [0,0,0]
     for i in range(len(line)):
@@ -25,19 +28,23 @@ def count(line):
         maxrgb = [max(rgb[0],maxrgb[0]), max(rgb[1],maxrgb[1]), max(rgb[2],maxrgb[2])]
     return maxrgb
 
+#Cleanup the input strings to make the calculations easier
 def parse(l):
     line = re.sub("Game \d*: ", "", l)
     line = re.sub("\n","",line)
     line = line.split("; ")
-    counts = count(line)
-    return [valid(counts), counts]
+    return line
 
+#Solve the exercise
 def solve(f):
     p1 = 0
     p2 = 0
+#This counter is the id of the game, this could be nice but it works
     counter=1
     for line in f.readlines():
-        results = parse(line)
+        clean = parse(line)
+        counts = count(clean)
+        results = [valid(counts), counts]
         p1+=results[0]*counter
         p2+=np.prod(results[1])
         counter+=1
