@@ -30,24 +30,22 @@ def count(line):
 
 #Cleanup the input strings to make the calculations easier
 def parse(l):
-    line = re.sub("Game \d*: ", "", l)
-    line = re.sub("\n","",line)
-    line = line.split("; ")
+    line = l.split(":")
+    line[0] = re.sub("Game ", "", line[0])
+    line[1] = re.sub("\n","",line[1])
+    line[1] = line[1].split("; ")
     return line
 
-#Solve the exercise
+#Solve both parts
 def solve(f):
     p1 = 0
     p2 = 0
-#This counter is the id of the game, this could be nice but it works
-    counter=1
     for line in f.readlines():
         clean = parse(line)
-        counts = count(clean)
+        counts = count(clean[1])
         results = [valid(counts), counts]
-        p1+=results[0]*counter
+        p1+=results[0]*int(clean[0])
         p2+=np.prod(results[1])
-        counter+=1
     return [p1,p2]
 
 def part1(r):
