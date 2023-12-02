@@ -9,9 +9,7 @@ def readInput():
 
 #Test if the amount of colored cubes matches the limits given in part 1
 def valid(rgb):
-    if rgb[0]>12 or rgb[1]>13 or rgb[2]>14:
-        return False
-    return True
+    return not (rgb[0]>12 or rgb[1]>13 or rgb[2]>14)
 
 #Count maximum amount of cubes per color per game
 def count(line):
