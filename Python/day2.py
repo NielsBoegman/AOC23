@@ -5,39 +5,43 @@ def readInput():
     f = open(sys.argv[1])
     return f.readlines()
 
-def solve(l):
+def valid(rgb):
+    if rgb[0]>12 or rgb[1]>13 or rgb[2]>14:
+        return False
+    return True
+    
+
+def count(line):
+    maxr = 0
+    maxb = 0
+    maxg = 0
+    for i in range(len(line)):
+        t = line[i].split(", ")
+        r=0
+        b=0
+        g=0
+        for j in t:
+            temp = j.split(" ")
+            match temp[1]:
+                case "red": r+=int(temp[0])
+                case "blue": b+=int(temp[0])
+                case "green": g+=int(temp[0])
+        maxr=max(r, maxr)
+        maxg=max(g,maxg)
+        maxb=max(b,maxb)
+    return [maxr,maxg,maxb]
+
+def parse(l):
     p1 = 0
     p2 = 0
     for x in range(len(l)):
         line = re.sub("Game \d*: ", "", l[x])
         line = re.sub("\n","",line)
         line = line.split("; ")
-        valid = True
-        gr = 0
-        gb = 0
-        gg = 0
-        for i in range(len(line)):
-            temp = line[i].split(", ")
-            rc = 0
-            bc = 0
-            gc = 0
-            for z in temp:
-                t = z.split(" ")
-                match t[1]:
-                    case "red": rc+= int(t[0])
-                    case "blue": bc+= int(t[0])
-                    case "green": gc+= int(t[0])
-            if rc>12 or gc>13 or bc>14:
-                valid = False
-            if rc > gr:
-                gr = rc
-            if bc > gb:
-                gb = bc
-            if gc > gg:
-                gg = gc
-        p2+=(gg*gb*gr) 
-        if valid:
+        counts = count(line)
+        if valid(counts):
             p1+=x+1
+        p2+=counts[0]*counts[1]*counts[2]
     return [p1,p2]
 
 def part1(r):
@@ -46,6 +50,6 @@ def part1(r):
 def part2(r):
     print("Part2: ", r[1])
 
-result = solve(readInput)
+result = parse(readInput())
 part1(result)
 part2(result)
