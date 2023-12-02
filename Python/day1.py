@@ -6,7 +6,14 @@ replacement = {"one": "o1e", "two": "t2o", "three":"t3e", "four":"f4r","five":"f
 
 #Open and return the file passed as parameter to program
 def readInput():
-    f = open(sys.argv[1])
+    if len(sys.argv)==1:
+        print("Missing parameter, use the program like this: python3 day1.py [inputfile]")
+        exit()
+    try:
+        f = open(sys.argv[1])
+    except FileNotFoundError:
+        print("File not found, check your filename and path and try again.")
+        exit()
     return f
 
 #Strip all non digit characters from the string

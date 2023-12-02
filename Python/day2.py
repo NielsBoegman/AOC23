@@ -4,7 +4,14 @@ import numpy as np
 
 #Open file passed as parameter to the program
 def readInput():
-    f = open(sys.argv[1])
+    if len(sys.argv)==1:
+        print("Missing parameter, use the program like this: python3 day2.py [inputfile]")
+        exit()
+    try:
+        f = open(sys.argv[1])
+    except FileNotFoundError:
+        print("File not found, check your filename and path and try again.")
+        exit()
     return f
 
 #Test if the amount of colored cubes matches the limits given in part 1
