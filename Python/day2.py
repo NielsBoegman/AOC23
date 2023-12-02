@@ -5,11 +5,11 @@ def readInput():
     f = open(sys.argv[1])
     return f.readlines()
 
-def parse():
-    p1=0
+def solve(l):
+    p1 = 0
     p2 = 0
-    for x in range(len(lines)):
-        line = re.sub("Game \d*: ", "", lines[x])
+    for x in range(len(l)):
+        line = re.sub("Game \d*: ", "", l[x])
         line = re.sub("\n","",line)
         line = line.split("; ")
         valid = True
@@ -46,7 +46,6 @@ def part1(r):
 def part2(r):
     print("Part2: ", r[1])
 
-lines = readInput()
-result = parse()
+result = solve(readInput)
 part1(result)
 part2(result)
