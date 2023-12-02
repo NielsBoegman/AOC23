@@ -30,7 +30,6 @@ def count(line):
 def parse(l):
     line = l.split(":")
     line[0] = re.sub("Game ", "", line[0])
-    line[1] = re.sub("\n","",line[1])
     line[1] = line[1].split("; ")
     return line
 
