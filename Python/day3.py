@@ -1,5 +1,4 @@
 import sys
-import re
 
 def readInput():
     if len(sys.argv)==1:
@@ -29,13 +28,10 @@ def findNumberHard(x,y,inp):
         if not inp[x][i].isdigit():
             end = i-1
             break
-    # print(x, y,start, end)
     return [findNumber(x, start, end, inp), end]
-
 
 def checkNumber(x,y, inp):
     directions = {1:[-1,-1], 2:[-1,0], 3:[-1,1], 4:[0,-1], 5:[0,1], 6:[1,-1], 7:[1,0], 8:[1,1]}
-    line = inp[x].strip()
     for dir in directions.values():
         nx = x+dir[0]
         ny = y+dir[1]
@@ -91,4 +87,3 @@ def solve(inp):
 solution = solve(readInput().readlines())
 print("Part1: ", solution[0])
 print("Part2: ", solution[1])
-# print(checkStar(1,2,readInput().readlines()))
