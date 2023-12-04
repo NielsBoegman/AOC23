@@ -25,12 +25,9 @@ def solve(f):
     matches = []
     for line in f.readlines():
         s=[]
-        l = line.split(":")
-        l = l[1].split("|")
+        l = line.split(":")[1].split("|")
         for x in range(2):
-            l[x]=l[x].split()
-            map(int, l[x])
-            s.append(set(l[x]))
+            s.append(set(map(int,l[x].split())))
         s2 = len(s[0].intersection(s[1]))
         matches.append([1,s2])
         if s2>0:
