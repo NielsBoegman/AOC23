@@ -1,14 +1,7 @@
 import sys
 
 def readInput():
-    if len(sys.argv)==1:
-        print("Missing parameter, use the program like this: python3 day2.py [inputfile]")
-        exit()
-    try:
-        f = open(sys.argv[1])
-    except FileNotFoundError:
-        print("File not found, check your filename and path and try again.")
-        exit()
+    f = open(sys.argv[1])
     return f.readlines()
 
 def solve(f):
