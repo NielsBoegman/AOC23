@@ -11,23 +11,20 @@ def part1(lines):
         temp = 0
         for z in range(times[x]):
             if (times[x]-z)*z > distances[x]:
-                temp+=1
-        res *= temp
+                temp=z
+                break
+        res *= times[x]-2*temp + 1
     return res
 
 def part2(lines):
     time = int("".join(lines[0].split(":")[1].split()))
     distance = int("".join(lines[1].split(":")[1].split()))
-    start, end = 0, 0
+    start = 0
     for x in range(time):
         if (time - x) * x > distance:
             start = x
             break
-    for x in range(time, 1, -1):
-        if (time - x) * x > distance:
-            end = x
-            break
-    return end - start + 1
+    return (time-2*start)
     
 l = readInput()
 print("Part1: ",part1(l))
