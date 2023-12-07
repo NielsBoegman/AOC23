@@ -12,10 +12,9 @@ def fullHouse(hand, p2):
     for x in hand:
         if x == 1:
             jcount +=1
-    print("jcount: ", jcount)
     streak = 1
     start =0
-    if p2:
+    if jcount>0:
         start = 1
     for x in range(start,4):
         if temp[x] == temp[x+1]:
@@ -33,6 +32,8 @@ def fullHouse(hand, p2):
                     return True
                 else:
                     return False
+            case 0:
+                return streak ==2 or streak == 3 
     return streak ==2 or streak == 3
 
 def detectPair(hand, p2):
@@ -41,10 +42,8 @@ def detectPair(hand, p2):
         if x == 1:
             jcount +=1
     if p2:
-        if jcount == 1:
+        if jcount >0:
             return False
-        else:
-            return True
     temp = sorted(hand)
     finalstreak = 1
     streak = 1
@@ -101,7 +100,7 @@ def part1(f):
         score2 += hands2_sorted[x][2]*(x+1)
     for x in range(len(hands_sorted)):
         score += hands_sorted[x][2]*(x+1)
-        print("The hand is: ", hands2_sorted[x][1]," with score: ", hands2_sorted[x][0])
+        print("The hand is: ", sorted(hands2_sorted[x][1])," with score: ", hands2_sorted[x][0])
     return [score,score2]
 
 file = readInput()
