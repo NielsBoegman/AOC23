@@ -1,22 +1,11 @@
 import sys
+from math import lcm as lcm
 
 dirdict = {'R':1,'L':0}
 mapdict = {}
 def readInput():
     return open(sys.argv[1])
 
-def gcd(a, b):
-    return a if b == 0 else gcd(b, a % b)
-
-
-def lcm(a, b):
-    return (a * b) // gcd(a, b)
-
-def allz(keys):
-    for key in keys:
-        if not key[2] == 'Z':
-            return False
-    return True
 
 def findLength(key,directions,p2):
     maxlen = len(directions)
