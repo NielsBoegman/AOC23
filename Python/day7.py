@@ -100,7 +100,6 @@ def part1(f):
         score2 += hands2_sorted[x][2]*(x+1)
     for x in range(len(hands_sorted)):
         score += hands_sorted[x][2]*(x+1)
-        print("The hand is: ", sorted(hands2_sorted[x][1])," with score: ", hands2_sorted[x][0])
     return [score,score2]
 
 file = readInput()
