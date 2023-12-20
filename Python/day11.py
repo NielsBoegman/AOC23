@@ -4,7 +4,7 @@ def readInput():
     return open(sys.argv[1])
 
 def solve(f):
-    map = []
+    stars = []
     count = 0
     for line in f.readlines():
         l = []
@@ -17,6 +17,11 @@ def solve(f):
                 l.append(chr(count))
                 count+=1
             else: continue
-        map.append(l)
+        stars.append(l)
         if empty:
-            map.append(l)
+            stars.append(l)
+    for x in range(len(stars[0])):
+        empty = True
+        for y in range(len(stars)):
+            if stars[x][y].isdigit():
+                empty = False
